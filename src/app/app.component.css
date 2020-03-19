@@ -1,0 +1,17 @@
+div {
+    width: 1300px;
+    margin: 0 0 0 0;
+  }
+
+  .graph_container{
+    display:block;
+    width:600px;
+  }
+
+  .container-fluid  div[class^="col"] {
+    border: 1px solid white;
+    background: #e4bbbb;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px
+ }
