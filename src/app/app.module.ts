@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +12,18 @@ import { BubbleChartComponent } from './bubble-chart/bubble-chart.component';
 
 import { ChartsModule } from 'ng2-charts';
 import { StackedBarChartComponent } from './stacked-bar-chart/stacked-bar-chart.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ILeapApiService } from './i-leap-api.service';
+import { TotalWorkOrdersComponent } from './total-work-orders/total-work-orders.component';
+import { MaintenanceWorkloadComponent } from './maintenance-workload/maintenance-workload.component';
+import { WOPrioritiesComponentComponent } from './wopriorities-component/wopriorities-component.component';
+import { ConfigReaderServiceService } from './config-reader-service.service';
+
+export const initializerConfigFn = (appConfig: ConfigReaderServiceService) => {
+  return () => appConfig.loadConfig();
+  };
+
+  
 
 @NgModule({
   declarations: [
@@ -22,14 +34,27 @@ import { StackedBarChartComponent } from './stacked-bar-chart/stacked-bar-chart.
     RadarChartComponent,
     PieChartComponent,
     BubbleChartComponent,
-    StackedBarChartComponent
+    StackedBarChartComponent,
+    TotalWorkOrdersComponent,
+    MaintenanceWorkloadComponent,
+    WOPrioritiesComponentComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ChartsModule
+    ChartsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializerConfigFn,
+      multi: true,
+      deps: [ConfigReaderServiceService],
+    },
+    ILeapApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+

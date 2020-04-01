@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
+import { ChartOptions, ChartType, ChartDataSets, ChartColor } from 'chart.js';
 import { Color } from 'ng2-charts';
 
 @Component({
@@ -10,6 +10,7 @@ import { Color } from 'ng2-charts';
 
 export class BubbleChartComponent {
 
+  public bubbleChartColors: ChartColor[];
   public bubbleChartOptions: ChartOptions = {
     responsive: true,
     scales: {
